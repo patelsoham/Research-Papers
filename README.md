@@ -9,11 +9,11 @@ instantiation, not the whole project.
 
 ## Contents
 
-- [phase1_priority.md](phase1_priority.md) — study plan, prioritization, and the canonical project statement.
+- [phase1_priority.md](phase1_priority.md) — study plan and prioritization.
 - [project_notes.md](project_notes.md) — conceptual primer, paper deep-dives, the paper-tie rubric, and curated reading list.
 - [research_paper_index.md](research_paper_index.md) — skimmable per-paper index and reference table.
 - `papers_deepdive/` — one full deep-dive per paper.
-- `.github/skills/paper-deepdive/` — skill encoding the project position, extraction conventions, and per-paper templates.
+- `.github/skills/paper-deepdive/` — skill encoding the **canonical project definition** (Project position), extraction conventions, and per-paper templates.
 
 ## Notes
 

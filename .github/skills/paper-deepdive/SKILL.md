@@ -7,7 +7,14 @@ description: "Use when working on the frozen-video-model dynamics research proje
 
 ## Project position
 
-**Canonical statement.** The single source of truth for *what this project is* lives in the "Research Problem" block of [phase1_priority.md](phase1_priority.md); the reading frame + paper-tie rubric live at the top of [project_notes.md](project_notes.md). Keep this skill consistent with those.
+**This skill is the canonical source of truth for *what this project is*.** The reading frame + paper-tie rubric live at the top of [project_notes.md](project_notes.md); the study plan lives in [phase1_priority.md](phase1_priority.md). Keep those consistent with this section.
+
+> **Canonical one-liner.** *Can a **frozen, action-blind** pretrained video model's representation be read — via a **toolbox of latent-space analysis techniques** — to recover **low-level action / inverse-dynamics** structure, **without training any new action module**?*
+>
+> **What it IS:** an interpretability-first study *and* method. Build a toolbox (probing, subspace/SVD, Jacobian, trajectory-sampling, intervention) to **find and characterize** action structure inside a frozen video model, then ground it to control with minimal action labels.
+> **What it is NOT:** a new latent-action learner, a fine-tuned policy, or a generate-video-then-act system. We do **not** train or co-train Φ, and we add **no** action head.
+> **Why video models:** large-scale frame-prediction pretraining must encode environment dynamics; the open question is whether that structure is **readable** or only **entangled**.
+> **Primary deliverables:** (1) the **latent-analysis toolbox** itself; (2) an **existence result** — does action structure live in a frozen action-blind Φ, and *where*? — with control grounding as the applied payoff. A **conclusive negative is a valid result**.
 
 **Research question.** Can a *frozen, action-blind* pretrained video model's **representation** be read — via a toolbox of latent-space analysis techniques — to recover **low-level action / inverse-dynamics** structure, **without training any new action module**?
 
@@ -19,7 +26,15 @@ description: "Use when working on the frozen-video-model dynamics research proje
 1. **A latent-analysis toolbox** — probing, subspace identification, Jacobian/SVD analysis, trajectory sampling, and amortized inversion — to characterize what does and does not live in $\Phi$'s representation. This is a primary deliverable, not a means to an end.
 2. **An existence result and method.** If the structure exists, recover it without retraining $\Phi$ and without per-domain world-model training, and decode it to control with far smaller action-labeled datasets than LAPA or ViPRA need. If it does not exist, the toolbox stands, and the conclusive negative shows action-readability is not a free byproduct of internet-scale predictive training.
 
-**Positioning (the two novelty axes).** (1) *Frozen vs. trained:* LAPO, LAPA, ViPRA, Genie, and DreamZero all train/co-train a world model and/or an action module; we keep $\Phi$ frozen and train only the extractor. (2) *Discover vs. manufacture:* those methods *manufacture* a latent action space by construction (VQ/IDM-FDM bottleneck, action head); we *discover* structure already latent in a frozen, **action-blind** $\Phi$ that never had an action interface. The defensible claim is the conjunction — drop "frozen" and you're Genie; drop "action-blind" and you're reading an exposed action port; drop "toolbox/discover" and you're just another latent-action learner.
+**Positioning (the two novelty axes).** (1) *Frozen vs. trained:* LAPO, LAPA, ViPRA, Genie, and DreamZero all train/co-train a world model and/or an action module; we keep $\Phi$ frozen and train only the extractor. (2) *Discover vs. manufacture:* those methods *manufacture* a latent action space by construction (VQ/IDM-FDM bottleneck, action head); we *discover* structure already latent in a frozen, **action-blind** $\Phi$ that never had an action interface. The defensible claim is the conjunction — drop "frozen" and you're Genie; drop "action-blind" and you're reading an exposed action port; drop "toolbox/discover" and you're just another latent-action learner. (Caveat: Genie's LAM is also the **strongest evidence the premise is true** — action structure *is* recoverable from video — so position it as proof-of-premise, not a method we refute.)
+
+**Direction note (Max).** "We want to develop a **toolbox of techniques for actually understanding the latent space** here so that we can actually find the low-level mapping. This is not trivial in and of itself." → The deliverable isn't only a representation→action decoder; it's the set of analysis techniques that make the mapping findable. Interpretability of the latent space is a first-class research goal.
+
+**Open questions.**
+- Which representation component (initial noise, intermediate denoising states, cross-frame deltas, AR logits/hidden states) carries action-relevant information?
+- Is the mapping linear / low-dimensional, or does it need a learned nonlinear decoder?
+- How few action labels are needed to ground the representation→action map?
+- Does the recovered structure transfer across embodiments and tasks?
 
 ## Claims to keep stress-testing
 

@@ -1,4 +1,4 @@
-# Paper Deep-Dives — DreamZero & V-JEPA 2
+# Paper Deep-Dives — DreamZero
 
 Concise extraction in the Main Idea / Prior-Work Limits / Methods / Results / This-Work Limits format.
 Full versions with math and citations live in [project_notes.md](../../project_notes.md).
