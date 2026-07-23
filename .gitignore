@@ -18,5 +18,7 @@ Papers/**/*.pdf
 *.pdf.txt
 *.pdf.txt.refs.txt
 
+assets/*
+
 
 phase1_priority.md

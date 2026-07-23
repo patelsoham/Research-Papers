@@ -32,6 +32,8 @@ A large pretrained video model can be turned into a SOTA policy by **fully fine-
 
 `contrast-baseline` · `scope-boundary`. The clearest "do the obvious thing" foil on **both** novelty axes: Cosmos Policy **fully fine-tunes** the base video model (not frozen) **and** **manufactures** an action interface by injecting action latent frames + training on demonstrations. So **Cosmos Policy weights are out-of-target** (action-conditioned → probing them is circular). The **valid probing target is the *base* Cosmos-Predict2-2B-Video2World checkpoint** — action-blind, latent-diffusion, exposes a structured noise/latent interface like Wan. This paper is the strongest evidence that the priors are *usable* for control (proof the dynamics are there), while we bet they are *readable* from the frozen base without the fine-tune. Its slow planning latency is another datapoint for the "generation-for-control is expensive" backdrop.
 
+**Base pretraining data — leakage bookkeeping (for our validation).** The base Cosmos-Predict2.5 pretraining robotics mix (Tab. 2 of *World Simulation with Video Foundation Models for Physical AI*, [arXiv 2511.00062](https://arxiv.org/abs/2511.00062)) explicitly includes **DROID, Bridge, AgiBot-Beta, GR00T, 1X, OpenX, RoboMIND**. **DROID is therefore in-distribution (soft-leakage-exposed)**: a plausible reconstruction there proves little about generalization. The Cosmos Policy recipe states that its *post-training* uses LIBERO and RoboCasa, but their omission from Tab. 2 does **not** establish that they are absent from the base model's broader ~200M-clip corpus. Treat LIBERO/RoboCasa base-corpus membership as **not disclosed**, not held-out; they remain the matched evaluation distributions for the frozen-vs-trained comparison.
+
 ## Citations
 
 - "fine-tuned from the NVIDIA Cosmos-Predict2-2B video foundation model" / "No architectural changes are made to the base video model" — Fig. 1 caption.
@@ -43,6 +45,7 @@ A large pretrained video model can be turned into a SOTA policy by **fully fine-
 - "The base Cosmos-Predict2 model is fully fine-tuned (all model weights)" — §Appendix (training).
 - "around 5 seconds to produce one action chunk" (planning latency limitation) — §6 Limitations.
 - "drop in performance from the final ablation … training the policy to also predict future state is crucial" — Table 5.
+- Base pretraining robotics data (leakage note): "high-quality robotics datasets with video counts by camera perspective" listing DROID / Bridge / AgiBot-Beta / GR00T / 1X / OpenX / RoboMIND — Tab. 2, *World Simulation with Video Foundation Models for Physical AI* (arXiv 2511.00062). LIBERO/RoboCasa are not listed in Tab. 2; membership in the full base corpus is not stated.
 
 ## References — pure-video & video-generation
 
