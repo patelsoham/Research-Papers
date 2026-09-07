@@ -6,6 +6,16 @@ Skimmable map of read papers for the **frozen, action-blind video-model dynamics
 
 ---
 
+### Large Video Planner — train video generation at scale, then retarget human motion to robots
+[deep-dive](papers_deepdive/large_video_planner.md) · arXiv 2512.15840 · [Project](https://www.boyuan.space/large-video-planner/) · **roles:** proof-of-premise · contrast-baseline · valid-probing-target (qualified)
+
+- **Motivations:** Replace scarce action-supervised VLA transfer with video pretraining whose sequences naturally expose physical interactions.
+- **Methodology:** Continue-train Wan 2.1 14B on 1.4M action-focused human/robot clips using Diffusion Forcing and History Guidance; decode video, reconstruct hands and scene in 3D, retarget to robot joints, and execute open-loop.
+- **How it differs:** Builds a 14B video planner at action-focused foundation scale and uses geometric retargeting rather than a learned IDM.
+- **Limitations:** Minutes per plan; reconstruction errors; calibrated, morphology-specific retargeting; open-loop execution.
+- **Conclusions:** 59.3% task-complete video plans on 100 third-party tasks versus Wan's 39.3%; nonzero but task-dependent zero-shot real-robot success.
+- **Ties to the project:** Exact generate-video-then-act foil. Frozen LVP is action-blind but has soft action leakage from specialized video; compare it with base Wan under the same latent bottleneck.
+
 ### V-JEPA 2 — non-generative video world model that understands, predicts, and plans
 [deep-dive](papers_deepdive/vjepa2.md) · arXiv 2506.09985 · [Code](https://github.com/facebookresearch/vjepa2) · **roles:** proof-of-premise · valid-probing-target (Stage-1 encoder) · scope-boundary (-AC)
 
@@ -46,19 +56,22 @@ Skimmable map of read papers for the **frozen, action-blind video-model dynamics
 
 ## Reference table
 
-`#` = number of the read papers (of the 3 deep-dived here: V-JEPA 2, Cosmos Policy, ViPRA) that cite the reference. Advisory; counts are presence-based (grep-verified), not raw occurrence. Re-sort as the corpus grows.
+`#` = number of the four count-audited papers (V-JEPA 2, Cosmos Policy, ViPRA, Large Video Planner) that cite the reference. Advisory; counts are presence-based (grep-verified), not raw occurrence. Re-sort as the corpus grows.
 
 | Reference | Cited by | # | Role | Read? |
 |---|---|---|---|---|
-| Cosmos (base video model) | VJEPA2, ViPRA | 2 | target | partial (Cosmos Policy deep-dive) |
+| Cosmos (base video model) | VJEPA2, ViPRA, LVP | 3 | target | partial (Cosmos Policy deep-dive) |
 | Genie | VJEPA2, Cosmos, ViPRA | 3 | background | no |
 | Dreamer | VJEPA2, Cosmos, ViPRA | 3 | background | no |
 | OpenVLA | VJEPA2, Cosmos, ViPRA | 3 | background | no |
-| Flow Matching (Lipman 2022) | ViPRA | 1 | mechanism | no |
+| Flow Matching (Lipman 2022) | ViPRA, LVP | 2 | mechanism | no |
 | LAPA | ViPRA | 1 | background | no |
-| UniPi | ViPRA | 1 | background | no |
+| UniPi | ViPRA, LVP | 2 | background | yes |
 | LWM-Chat-1M | ViPRA | 1 | target | no |
 | DINO-WM | VJEPA2 | 1 | target | no |
-| Wan | Cosmos, ViPRA | 2 | target | no |
+| Wan | Cosmos, ViPRA, LVP | 3 | target | no |
+| Diffusion Forcing | LVP | 1 | mechanism | no |
+| History-Guided Video Diffusion | LVP | 1 | mechanism | no |
+| Gen2Act | LVP | 1 | background | no |
 
-- Read-next priority (role=`target`, unread, high #): **base Cosmos-Predict2** and **Wan** (both action-blind probing candidates), then **DINO-WM** (frozen-features → planning, the strongest "frozen premise works" anchor).
+- Read-next priority (role=`target`, unread, high #): **Wan** and **base Cosmos-Predict2** (both action-blind probing candidates), then **DINO-WM** (frozen features to planning, the strongest "frozen premise works" anchor).
